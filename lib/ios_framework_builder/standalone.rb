@@ -24,7 +24,8 @@ preamble
     end
 
     def build io
-      io.puts "#!#{ruby_executable}"
+      # Use system ruby for this script
+      io.puts "#!/usr/bin/ruby"
       io << PREAMBLE
 
       each_source_file do |filename|

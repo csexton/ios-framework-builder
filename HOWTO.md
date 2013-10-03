@@ -105,7 +105,7 @@ Here's the real magic, the script that does all the heavy lifing. This is the on
 
 A couple of notes about this script
 
-* I used ruby, mostly because it got a bit messy handling edge cases in bash. However this uses the system ruby included in Mac OS X with no dependencies at all. It should just work. It even avoids any ruby version managers that may be installed.
+* I used ruby, mostly because it got a bit messy handling edge cases in bash. However this can use the system ruby included in Mac OS X with no dependencies at all. It should just work. It even avoids any ruby version managers that may be installed.
 * This will recompile all the targets to make sure the required archetectures are included. This is a bit of a bigger hammer solution, but seems less fragile.
 * Assumes that `$PROJECT\_NAME` is the same name you use for the library name and framework name. If not just edit the script.
 
@@ -115,4 +115,4 @@ To get a copy of the script just download the file from github [standalone/frame
 curl https://raw.github.com/csexton/ios-framework-builder/master/standalone/framework-builder > Scripts/framework-builder
 ```
 
-Hopefully this will
+If you have any changes to this process, please feel free to send a pull request. I imagine as Apple makes changes to iOS there will be updates that this project will require.
