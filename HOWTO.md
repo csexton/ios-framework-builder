@@ -10,7 +10,7 @@ If necessary, just make a new library project.
 
 This will just make a normal `.a` binary library with headers. We will add a target that is going to convert it into a proper `framework`
 
-![Framework New](/images/framework-new.png)
+![Framework New](/resources/framework-new.png)
 
 ### 1.2 Framework Header
 
@@ -35,13 +35,13 @@ First you need to add a Copy Headers build phase. This can be done by going to t
 
 You should see something like this when you are done:
 
-![Framework Header Target Membership](/images/framework-cp.png)
+![Framework Header Target Membership](/resources/framework-cp.png)
 
 To expose your libraries functionality you need to publish the headers you want visable. This is done with XCode's "Target Membership."
 
 To set the membership mash ⌘-⌥-0 and check and uncheck the Target Membership and set it to be "project"
 
-![Framework Header Target Membership](/images/framework-header.png)
+![Framework Header Target Membership](/resources/framework-header.png)
 
 **NOTE**: You will have to do this any time you want a header to be included in your `.framework`.
 
@@ -65,7 +65,7 @@ From the menu bar add a new target:
   * Other
   * Aggregate
 
-![Framework Target](/images/framework-agg.png)
+![Framework Target](/resources/framework-agg.png)
 
 Like Jeff, I prefer to call this target "Framework".
 
@@ -73,11 +73,11 @@ Like Jeff, I prefer to call this target "Framework".
 
 Now Click on the project and edit the "Build Settings" where you can add your library as a dependency for the framework.
 
-![Framework Deps](/images/framework-deps.png)
+![Framework Deps](/resources/framework-deps.png)
 
 Now you will see it listed under your project.
 
-![Framework Targets](/images/framework-targets.png)
+![Framework Targets](/resources/framework-targets.png)
 
 
 ### Build The Framework
@@ -92,7 +92,7 @@ On the menu bar select:
 
 Now you have two options, you can either paste the script into the Xcode project settings or just use it to call your script. I prefer the latter because then git can track and merge your build script like normal code.
 
-![Framework Build](/images/framework-build.png)
+![Framework Build](/resources/framework-build.png)
 
 Simply paste a call to your script and adjust the path as is necessary.
 
