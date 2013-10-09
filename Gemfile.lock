@@ -32,3 +32,4 @@ DEPENDENCIES
   pry
   rake
   rspec
+  rspec-mocks
