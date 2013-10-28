@@ -8,7 +8,8 @@ module IOSFrameworkBuilder
       :objroot,
       :project_file_path,
       :sdk_name,
-      :symroot
+      :symroot,
+      :target_build_dir
 
     def initialize
       @name = ENV['PROJECT_NAME']
@@ -19,6 +20,7 @@ module IOSFrameworkBuilder
       @project_file_path = ENV['PROJECT_FILE_PATH']
       @sdk_name = ENV['SDK_NAME']
       @symroot = ENV['SYMROOT']
+      @target_build_dir = ENV['TARGET_BUILD_DIR']
     end
 
     def binary_paths
@@ -26,7 +28,7 @@ module IOSFrameworkBuilder
     end
 
     def header_path
-      "#{build_dir}/#{name}Headers/"
+      "#{target_build_dir}/#{name}Headers/"
     end
 
     def call
