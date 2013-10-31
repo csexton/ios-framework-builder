@@ -13,6 +13,7 @@ module IOSFrameworkBuilder
       builder.call
       frameworker.call
       frameworker.import_headers builder.header_path
+      frameworker.import_resources builder.resources_path
       smasher.call builder.binary_paths, frameworker.binary_path
 
       validator.fat_binary frameworker.binary_path

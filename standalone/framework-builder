@@ -36,11 +36,17 @@ module IOSFrameworkBuilder
       FileUtils.cp_r Dir["#{header_source_dir}/*"], "#{dir}/Versions/A/Headers", :preserve => true
     end
 
+    def import_resources(resource_source_dir)
+      FileUtils.cp_r Dir["#{resource_source_dir}/*"], "#{dir}/Versions/A/Resources", :preserve => true
+    end
+
     def call
       FileUtils.mkdir_p "#{dir}/Versions/A/Headers", :verbose => true
+      FileUtils.mkdir_p "#{dir}/Versions/A/Resources", :verbose => true
       FileUtils.ln_sf "A", "#{dir}/Versions/Current"
       FileUtils.ln_sf "Versions/Current/Headers", "#{dir}/Headers"
       FileUtils.ln_sf "Versions/Current/#{name}", "#{dir}/#{name}"
+      FileUtils.ln_sf "Versions/Current/Resources", "#{dir}/Resources"
     end
 
     private
@@ -82,6 +88,10 @@ module IOSFrameworkBuilder
 
     def header_path
       "#{target_build_dir}/#{name}Headers/"
+    end
+
+    def resources_path
+      "#{target_build_dir}/#{name}Resources/"
     end
 
     def call
@@ -188,6 +198,7 @@ module IOSFrameworkBuilder
       builder.call
       frameworker.call
       frameworker.import_headers builder.header_path
+      frameworker.import_resources builder.resources_path
       smasher.call builder.binary_paths, frameworker.binary_path
 
       validator.fat_binary frameworker.binary_path

@@ -31,6 +31,10 @@ module IOSFrameworkBuilder
       "#{target_build_dir}/#{name}Headers/"
     end
 
+    def resources_path
+      "#{target_build_dir}/#{name}Resources/"
+    end
+
     def call
       os_opts = default_opts.merge({:sdk => "iphoneos#{sdk_version}"})
       xcodebuild os_opts, default_vars
