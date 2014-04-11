@@ -2,6 +2,10 @@ module IOSFrameworkBuilder
   class Builder
     include DeathRunner
     attr_accessor :name,
+      :static_lib_target,
+      :static_lib_name,
+      :static_lib_header_dir,
+      :static_lib_resources_dir,
       :build_dir,
       :build_root,
       :configuration,
@@ -13,6 +17,10 @@ module IOSFrameworkBuilder
 
     def initialize
       @name = ENV['PROJECT_NAME']
+      @static_lib_name = ENV['STATIC_LIB_NAME'] ? ENV['STATIC_LIB_NAME'] : @name
+      @static_lib_target = ENV['STATIC_LIB_TARGET'] ? ENV['STATIC_LIB_TARGET'] : @static_lib_name
+      @static_lib_header_dir = ENV['STATIC_LIB_HEADER_DIR'] ? ENV['STATIC_LIB_HEADER_DIR'] : "#{name}Headers"
+      @static_lib_resources_dir = ENV['STATIC_LIB_RESOURCES_DIR'] ? ENV['STATIC_LIB_RESOURCES_DIR'] : "#{name}Resources"
       @build_dir = ENV['BUILD_DIR']
       @build_root = ENV['BUILD_ROOT']
       @configuration = ENV['CONFIGURATION']
@@ -28,11 +36,11 @@ module IOSFrameworkBuilder
     end
 
     def header_path
-      "#{target_build_dir}/#{name}Headers/"
+      "#{target_build_dir}/#{static_lib_header_dir}/"
     end
 
     def resources_path
-      "#{target_build_dir}/#{name}Resources/"
+      "#{target_build_dir}/#{static_lib_resources_dir}/"
     end
 
     def call
@@ -59,12 +67,12 @@ module IOSFrameworkBuilder
     def default_opts
       {
         :project => project_file_path,
-        :target => name,
+        :target => static_lib_target,
         :configuration => configuration
       }
     end
     def binary_path(sdk)
-      "#{build_dir}/#{configuration}-#{sdk}/lib#{name}.a"
+      "#{build_dir}/#{configuration}-#{sdk}/lib#{static_lib_name}.a"
     end
 
     def format_opts(hash)
