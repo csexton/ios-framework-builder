@@ -20,6 +20,8 @@ module IOSFrameworkBuilder
     end
 
     def call
+      FileUtils.rm_rf "#{dir}", :verbose => true
+
       FileUtils.mkdir_p "#{dir}/Versions/A/Headers", :verbose => true
       FileUtils.mkdir_p "#{dir}/Versions/A/Resources", :verbose => true
       FileUtils.ln_sf "A", "#{dir}/Versions/Current"
