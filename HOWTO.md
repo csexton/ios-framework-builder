@@ -1,4 +1,4 @@
-I was inspired a great deal by [Jeff Verkoeyen's iOS Framework](https://github.com/jverkoey/iOS-Framework) guide, however there were a few things the broke when apple released the new 64 bit archetectures. Primarily the fact that we now have 32 bit and 64 bit simulator archetectures. Unfortunatly xcode does not give you any way to specify the archs you want for a simulator build, and I have been unable to figure out how to coax a fat binary build when I am compiling for the simulator. I was able to get around this with `xcodebuild` and a few environment variables. I also wanted to keep all the frame work building steps together instead of spreading them across different targets.
+I was inspired a great deal by [Jeff Verkoeyen's iOS Framework](https://github.com/jverkoey/iOS-Framework) guide, however there were a few things the broke when apple released the new 64 bit architectures. Primarily the fact that we now have 32 bit and 64 bit simulator architectures. Unfortunatly xcode does not give you any way to specify the archs you want for a simulator build, and I have been unable to figure out how to coax a fat binary build when I am compiling for the simulator. I was able to get around this with `xcodebuild` and a few environment variables. I also wanted to keep all the frame work building steps together instead of spreading them across different targets.
 
 At the end of this guide you will have a single aggregate target that will build your library and compile it into a `.framework`. The original targets will just build a binary `.a` as normal.
 
@@ -44,6 +44,14 @@ To set the membership mash ⌘-⌥-0 and check and uncheck the Target Membership
 ![Framework Header Target Membership](/resources/framework-header.png)
 
 **NOTE**: You will have to do this any time you want a header to be included in your `.framework`.
+
+Update the public headers path. In build setting search for "Public Headers Folder Path" and change that value to be:
+
+```
+$(PROJECT_NAME)Headers
+```
+
+This will place the headers in a folder like `MyProjectHeaders` in the build directory, which will then be copied into the framework bundle.
 
 ### 1.4 Disable Code Striping
 
@@ -106,7 +114,7 @@ Here's the real magic, the script that does all the heavy lifing. This is the on
 A couple of notes about this script
 
 * I used ruby, mostly because it got a bit messy handling edge cases in bash. However this can use the system ruby included in Mac OS X with no dependencies at all. It should just work. It even avoids any ruby version managers that may be installed.
-* This will recompile all the targets to make sure the required archetectures are included. This is a bit of a bigger hammer solution, but seems less fragile.
+* This will recompile all the targets to make sure the required architectures are included. This is a bit of a bigger hammer solution, but seems less fragile.
 * Assumes that `$PROJECT\_NAME` is the same name you use for the library name and framework name. If not just edit the script.
 
 To get a copy of the script just download the file from github [standalone/framework-builder](standalone/framework-builder) or curl it down:
