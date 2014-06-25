@@ -68,7 +68,7 @@ module IOSFrameworkBuilder
     end
 
     def format_opts(hash)
-      hash.map{|k,v| "-#{k} #{v}"}.join(' ')
+      hash.map{|k,v| "-#{k} \"#{v}\""}.join(' ')
     end
 
     def format_vars(hash)
